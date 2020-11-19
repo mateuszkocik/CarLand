@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head>
+<title>Insert title here</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+</head>
+<body>
+	
+	<nav class="navbar navbar-light bg-warning" id="mynavbar" th:fragment="navbar">
+      <a th:href="@{/}" class="navbar-brand"> <i class="fas fa-car mr-2 d-none d-sm-inline"></i>CarLand</a>
+      <div class="d-inline-flex">
+      	
+      	
+      	<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}" class="btn btn-dark mx-2">Admin</a>
+      	<a th:href="@{/sellmycar}" class="btn btn-danger mx-2"> Sell my car + </a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/registration}" class="btn btn-primary">Sign up</a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}"class="btn btn-success mx-2">Sign in</a>
+        
+        <div class="dropdown" sec:authorize="isAuthenticated()">
+          <button class="btn btn-primary dropdown-toggle mx-2 my-sm-0" type="button" data-toggle="dropdown" th:text="${session.user.name}"></button>
+          <div class="dropdown-menu dropdown-menu-right bg-warning">
+            <div class="px-4">
+              
+              
+              <a th:href="@{/profile}" class="dropdown-item btn btn-success btn-block">Show profile</a>
+              
+              <form th:action="@{/logout}" method="POST">
+              	<input class="dropdown-item btn btn-success btn-block" type="submit" value="Log out" />
+              </form>
+              
+            </div>
+              
+            </div>
+      </div>
+        
+    </div>
+    </nav>
+    
+    <div class="container-fluid bg-dark" th:fragment="footer" style="height:200px;">
+    	
+    </div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
+</body>
+</html>

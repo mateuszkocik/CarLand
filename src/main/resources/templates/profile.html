@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    
+    
+    <title>CarLand</title>
+  </head>
+  <body>
+  <div class="bg-info" >
+    <div th:replace="fragments :: navbar"> </div>
+    	
+    	<div class="container p-5" style="height: auto;">
+    		
+    		<h4>Details</h4>
+    		<p th:text="${session.user.name}" id="name"></p>
+    
+		    <p th:text="${session.user.telephoneNumber}" id="telephoneNumber"></p>
+		    
+		    <p th:text="${session.user.city}" id="city"></p>
+		    
+		    <p th:text="${session.user.street}" id="street"></p>
+		    
+		    <p th:text="${session.user.postalCode}" id="postalCode"></p>
+		    
+		    <h4>Adverts</h4>
+		    <table class="table table-dark">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th scope="col">Id</th>
+			      <th scope="col">Title</th>
+			      <th scope="col">State</th>
+			      <th scope="col">Action</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	<tr th:each="advert: ${adverts}">
+			  		<th scope="row" th:text="${advert.id}"></th>
+			  		<td th:text="${advert.title}"></td>
+			  		<td th:text="${advert.state}"></td>
+			  		<td>
+			  			<a th:href="@{/advert(id=${advert.id})}" class="btn-sm btn-success" role="button">View</a>
+			  			<a th:href="@{/edit(id=${advert.id})}" class="btn-sm btn-primary" role="button">Edit</a>
+			  			<a th:href="@{/profile/delete(advertToDelete=${advert.id})}"  type="button" class="btn-sm btn-danger" role="button" onclick="if (!(confirm('Are you sure you want to delete this advert?'))) return false">Delete</a>
+			  		</td>
+			  	</tr>
+			  </tbody>
+			</table>
+    	</div>
+    
+    
+	<div th:replace="fragments :: footer"></div>
+	</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
